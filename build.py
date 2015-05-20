@@ -20,8 +20,8 @@ def osx():
     call(["cp", "main.html", "machinery-skeleton/skeleton/tmp/machinery.app/Contents/Resources/app/"])
     call(["cp", "-R", "dist/", "machinery-skeleton/skeleton/tmp/machinery.app/Contents/Resources/app/"])
 
-    call(["rm", "-rf", "release/osx/machinery_latest.dmg"])
-    call(["appdmg", "machinery-skeleton/skeleton/osx/appdmg.json", "release/osx/machinery_latest.dmg"])
+    call(["rm", "-rf", "machinery-skeleton/release/osx/machinery_latest.dmg"])
+    call(["appdmg", "machinery-skeleton/skeleton/osx/appdmg.json", "machinery-skeleton/release/osx/machinery_latest.dmg"])
 
 
 def win():
@@ -37,7 +37,7 @@ def win():
     shutil.copytree("dist", "machinery-skeleton\\skeleton\\tmp\\machinery\\resources\\app\\dist")
     shutil.move("machinery-skeleton\\skeleton\\tmp\\machinery\\resources\\app\\dist\\machinery\\machinery",
                 "machinery-skeleton\\skeleton\\tmp\\machinery\\resources\\app\\dist\\machinery\\machinery.exe")
-    call(["7z", "a", "-tzip", "release\\win\\machinery_latest.zip", ".\\machinery-skeleton\\skeleton\\tmp\\machinery"])
+    call(["7z", "a", "-tzip", "machinery-skeleton\\release\\win\\machinery_latest.zip", ".\\machinery-skeleton\\skeleton\\tmp\\machinery"])
 
 def linux():
     print("running linux specifics")
