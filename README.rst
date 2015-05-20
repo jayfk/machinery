@@ -35,6 +35,10 @@ Build
 
 **On OSX**
 
+Clone the electron skeleton into the machinery folder
+
+``git clone git@github.com:jayfk/machinery-skeleton.git``
+
 Install appdmg as a global node package
 
 ``npm install -g appdmg``
@@ -58,6 +62,10 @@ If you want to run the webserver without electron, run
 ``skeleton/tmp/machinery.app/Contents/Resources/app/machinery/machinery``
 
 **On Windows**
+
+Clone the electron skeleton into the machinery folder
+
+``git clone git@github.com:jayfk/machinery-skeleton.git``
 
 Install 7zip and make sure that the installation folder is in your path so that you can run ``7z`` directly from your terminal.
 
