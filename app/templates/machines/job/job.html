@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block js %}
+    <script type="text/javascript">
+
+        function pollJob() {
+            var url = $("#job-output").data("poll-url");
+            var request = $.ajax({
+                url: url,
+                method: "GET"
+            });
+
+            request.done(function (msg) {
+                $("#job-output").html(msg.content);
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                console.log("Request failed: " + textStatus);
+            });
+        }
+
+        function launchJob() {
+            var url = $("#job-output").data("launch-url");
+            var request = $.ajax({
+                url: url,
+                method: "POST",
+                data: {
+                    "job": $("#job-output").data("job"),
+                    "csrfmiddlewaretoken": $("input[name='csrfmiddlewaretoken']").val()
+                }
+            });
+
+            request.done(function (msg) {
+                if(msg.success){
+                    window.location.replace($("#job-output").data("redirect-url"));
+                }else{
+                    window.location.replace($("#job-output").data("error-url"));
+                }
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                window.location.replace($("#job-output").data("error-url"));
+            });
+        }
+
+        $(document).ready(function () {
+            launchJob();
+            setInterval(pollJob, 3000);
+        });
+    </script>
+{% endblock %}
+
+{% block title %}Starting Machine{% endblock %}
+
+{% block content %}
+
+    <div class="card-panel amber darken-2 white-text">
+                <i class="mdi-alert-warning white-text"></i> Don't leave this page until the machine is created.
+            </div>
+
+    {% csrf_token %}
+    <div class="row mtop30">
+        <div class="col s12">
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <span class="headline"> Command</span>
+
+            <div class="code mtop20">
+                    {{ job.command }}
+            </div>
+        </div>
+
+
+        <div class="col s12 mtop30">
+            <span class="headline"> Log</span>
+        <div class="code mtop20" id="job-output" data-poll-url="{{ poll_url }}"
+             data-launch-url="{{ launch_url }}" data-job="{{ job.pk }}" data-redirect-url="{{ redirect_url }}"
+                data-error-url="{% url "machines:job-error" job.pk %}">
+                {% include "machines/include/job.html" %}
+             </div>
+        </div>
+    </div>
+{% endblock %}

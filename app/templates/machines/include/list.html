@@ -1,0 +1,46 @@
+{% if machines %}
+    <div class="row">
+        <ul class="collection">
+            {% for machine in machines %}
+                <li class="collection-item avatar">
+                    <img src="{{ machine.driver_class.logo }}" alt="" class="circle">
+                    <span class="title">{{ machine.name }}</span>
+
+                    <p>
+                        <strong>
+                            {% if machine.state == "running" %}
+                                <span class="green-text">
+                                    {{ machine.state }}
+                                </span>
+                            {% elif machine.state == "stopped" %}
+                                <span class="red-text">
+                                    {{ machine.state }}
+                                </span>
+                            {% else %}
+                                <span class="">
+                                    {{ machine.state }}
+                                </span>
+                            {% endif %}
+                        </strong>
+                        <br/>
+                        {{ machine.ip }}
+                    </p>
+                    <a href="{% url "machines:inspect" machine.name %}" class="secondary-content btn-floating blue darken-2"><i
+                            class="mdi-communication-call-made"></i></a>
+
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% else %}
+    <div class="row">
+        <div class="col s12">
+    <span class="headline">There are no configured machines
+    </span>
+
+            <p>
+                To create a new machine, click <a href="{% url "machines:driver" %}">here</a>.
+            </p>
+        </div>
+    </div>
+{% endif %}

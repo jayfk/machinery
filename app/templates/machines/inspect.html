@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Inspect {{ machine_name }}{% endblock %}
+
+
+{% block js %}
+    <script type="application/javascript">
+
+        function updateInspect() {
+
+            var request = $.ajax({
+                url: $("#inspect").data("url"),
+                method: "GET"
+            });
+
+            request.done(function (msg) {
+                console.log("inspect updated");
+                //$("#inspect").html(msg.content);
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                console.log("Request failed: " + textStatus);
+            });
+        }
+
+        $(document).ready(function () {
+
+            updateInspect();
+
+        });
+
+    </script>
+{% endblock %}
+
+{% block content %}
+
+        <div id="inspect" data-url="{{ inspect_url }}">
+            {% include "machines/include/inspect.html" %}
+        </div>
+
+{% endblock %}
+

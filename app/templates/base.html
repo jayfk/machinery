@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>machinery</title>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static "css/materialize.css" %}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static "css/style.css" %}" media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+</head>
+<body>
+
+<header>
+    {% comment %}
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a class="page-title">{% block title %} {% endblock %}</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full"><i
+            class="mdi-navigation-menu"></i></a></div>
+    {% endcomment %}
+    <ul id="sidebar-list" class="side-nav fixed" data-url="{{ sidebar_url }}">
+
+
+        {% include "machines/include/sidebar.html" %}
+
+    </ul>
+</header>
+
+<main>
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12">
+                {% if messages %}
+                    <div class="section">
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <div class="section">
+
+                            {% block content %}
+
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static "js/jquery.min.js" %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static "js/materialize.min.js" %}"></script>
+<script type="application/javascript">
+
+    function updateMachineSidebar() {
+
+        var request = $.ajax({
+            url: $("#sidebar-list").data("url"),
+            method: "GET"
+        });
+
+        request.done(function (msg) {
+            console.log("sidebar updated");
+            $("#sidebar-list").html(msg.content);
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+            console.log("Request failed: " + textStatus);
+        });
+    }
+
+    $(document).ready(function () {
+
+
+        updateMachineSidebar();
+
+    });
+
+
+</script>
+{% block js %}{% endblock %}
+</body>
+</html>

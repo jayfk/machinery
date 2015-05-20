@@ -1,0 +1,33 @@
+<li class="logo">
+    <a id="logo-container" href="{% url "machines:list" %}" class="brand-logo">
+            Machines</a>
+<a id='logo-button' class="btn-floating waves-effect waves-light green" href="{% url "machines:driver" %}">
+    <i class="mdi-content-add"></i>
+</a>
+</li>
+
+{% for machine in machines %}
+
+    <li class="bold">
+        <a href="{% url "machines:inspect" machine.name %}" class="waves-effect waves-teal">
+
+            {% if machine.state == "running" %}
+            <span class="badge green-text">
+                {{ machine.state }}
+            </span>
+            {% elif machine.state == "stopped" %}
+            <span class="badge red-text">
+                {{ machine.state }}
+            </span>
+            {% else %}
+            <span class="badge">
+                {{ machine.state }}
+            </span>
+            {% endif %}
+
+            {{ machine.name }}
+        </a>
+    </li>
+{% empty %}
+
+{% endfor %}

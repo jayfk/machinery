@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Machines{% endblock %}
+
+
+{% block js %}
+    <script type="application/javascript">
+
+        function updateMachineList() {
+
+            var request = $.ajax({
+                url: $("#machine-table").data("url"),
+                method: "GET"
+            });
+
+            request.done(function (msg) {
+                console.log("machine-table updated");
+                $("#machine-table").html(msg.content);
+                $('.collapsible').collapsible({
+                accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+            });
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                console.log("Request failed: " + textStatus);
+            });
+        }
+
+        $(document).ready(function () {
+
+            updateMachineList();
+            $('.collapsible').collapsible({
+                accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+            });
+
+        });
+
+
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12">
+        <div id="machine-table" data-url="{{ table_url }}">
+            {% include "machines/include/list.html" %}
+        </div>
+    </div>
+{% endblock %}
+

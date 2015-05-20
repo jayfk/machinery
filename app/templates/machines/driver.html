@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Driver{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(".cloud-driver").on("mouseenter", function(){
+            $(this).children(".delete-btn").css("visibility", "visible");
+        });
+        $(".cloud-driver").on("mouseleave", function(){
+            $(this).children(".delete-btn").css("visibility", "hidden");
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+
+
+
+
+    <div class="row">
+        <div class="col s12">
+    <span class="headline">Remote
+    </span>
+
+            <a class="btn-floating waves-effect waves-light green add-driver-btn"
+               href="{% url "drivers:list" %}"><i class="mdi-content-add"></i>
+            </a>
+        </div>
+    </div>
+
+    {% if cloud_drivers %}
+        <div class="row mtop30">
+            {% for driver in cloud_drivers %}
+                <div class="col s12 m4 l4 cloud-driver">
+
+                    <div class="card ">
+                        <div class="name blue-grey white-text">{{ driver.name }} </div>
+                        <div class="card-image">
+                            <a href="{% url "machines:add_cloud" driver.identifier driver.pk %}">
+                                <img src="{{ driver.logo }}">
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <a href="{% url "drivers:delete" driver.identifier driver.pk %}" class="btn-floating red delete-btn"
+                    ><i
+                            class="mdi-action-delete"></i> </a>
+                </div>
+
+
+
+
+
+
+
+            {% endfor %}
+
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col s12">
+                <p>If you want to create a machine on a remote host, you need to add your login credentials first.</p>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row mtop20">
+        <div class="col s12">
+    <span class="headline">Local
+    </span>
+
+
+        </div>
+    </div>
+    <div class="row">
+        {% for driver in local_drivers %}
+            <div class="col s12 m4 l4">
+                <div class="card">
+                    <div class="card-image">
+                        <a href="{% url "machines:add_local" driver.identifier %}">
+                            <img src="{{ driver.logo }}">
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

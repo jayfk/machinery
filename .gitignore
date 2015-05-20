@@ -1,0 +1,45 @@
+# Basics
+
+*.py[cod]
+*.pyc
+__pycache__
+
+# Logs
+*.log
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+*.pot
+
+# Pycharm
+.idea
+
+# Vim
+
+*~
+*.swp
+*.swo
+
+# npm
+node_modules/
+
+# Campass
+.sass-cache
+design/
+staticfiles/
+media/
+
+*.sqlite3
+build/
+dist/
+src/
+bin/
+machinery-skeleton/
+
+launch.py

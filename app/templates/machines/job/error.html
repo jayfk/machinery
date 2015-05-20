@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Error{% endblock %}
+
+{% block content %}
+
+    <div class="card-panel red darken-4 white-text">
+                <i class="mdi-alert-warning white-text"></i> There was an error creating the machine.
+            </div>
+
+
+    <div class="row">
+        <div class="col s12">
+            <span class="headline"> Command</span>
+
+            <div class="code mtop20">
+                    {{ job.command }}
+            </div>
+        </div>
+
+
+        <div class="col s12 mtop30">
+            <span class="headline"> Log</span>
+        <div class="code mtop20" id="job-output">
+                {{ job.output }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

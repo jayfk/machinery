@@ -1,0 +1,77 @@
+<div class="row summary-row">
+    <div class="col s4 summary">
+        <strong>Name</strong> {{ machine_name }}
+    </div>
+    <div class="col s5 summary">
+
+        <strong>State</strong>
+
+        <strong>
+            {% if machine.state == "running" %}
+                <span class="green-text">{{ machine.state }}</span>
+            {% elif machine.state == "stopped" %}
+                <span class="red-text">{{ machine.state }}</span>
+            {% else %}
+                {{ machine.state }}
+            {% endif %}
+        </strong>
+
+    </div>
+
+    <div class="col s1 summary">
+        <img src="{{ machine.driver_class.logo }}" class="img img-responsive" style="height: 60px;"/>
+    </div>
+
+    <div class="col s2 summary" style="padding-top:10px;">
+        {% if machine_name %}
+        <a href="{% url "machines:remove" machine_name %}" class="btn-floating red right"><i
+                        class="mdi-action-delete" ></i> </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<div class="row mtop20">
+    <div class="col s12 well">
+        <div class="code">
+            eval "$(docker-machine env {{ machine.name }})"
+        </div>
+    </div>
+</div>
+
+<ul class="collection with-header">
+    <li class="collection-header"><h4>Settings</h4></li>
+    {% for key, value in machine.inspect.items %}
+        <li class="collection-item">{{ key }} <span class="badge">{{ value }}</span></li>
+    {% endfor %}
+</ul>
+
+<ul class="collection with-header">
+    <li class="collection-header"><h4>Driver</h4></li>
+    {% for key, value in machine_driver.items %}
+        <li class="collection-item">{{ key }} <span class="badge">{{ value }}</span></li>
+    {% endfor %}
+</ul>
+
+<ul class="collection with-header">
+    <li class="collection-header"><h4>Engine Options</h4></li>
+    {% for key, value in machine_host_opts.EngineOptions.items %}
+        <li class="collection-item">{{ key }} <span class="badge">{{ value }}</span></li>
+    {% endfor %}
+</ul>
+
+<ul class="collection with-header">
+    <li class="collection-header"><h4>Swarm Options</h4></li>
+    {% for key, value in machine_host_opts.SwarmOptions.items %}
+        <li class="collection-item">{{ key }} <span class="badge">{{ value }}</span></li>
+    {% endfor %}
+</ul>
+
+<ul class="collection with-header">
+    <li class="collection-header"><h4>Auth Options</h4></li>
+    {% for key, value in machine_host_opts.AuthOptions.items %}
+        <li class="collection-item">{{ key }} <span class="badge">{{ value }}</span></li>
+    {% endfor %}
+</ul>
+
+

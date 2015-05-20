@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+
+        <h3></h3>
+
+        {{ form|crispy }}
+
+
+        <button class="btn-large red">Delete</button>
+    </form>
+{% endblock %}

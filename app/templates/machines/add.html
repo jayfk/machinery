@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block js %}
+    <script type="text/javascript">
+        $("#id_machine-enable_swarm").on("click", function () {
+
+            toggleSwarmForm();
+        });
+
+        function toggleSwarmForm() {
+            if ($("#id_machine-enable_swarm").is(':checked')) {
+                $("#swarm_form").show();
+            } else {
+                $("#swarm_form").hide();
+            }
+        }
+
+        $(document).ready(function () {
+            toggleSwarmForm();
+            $('select').material_select();
+        });
+    </script>
+{% endblock %}
+
+{% block title %}Start Machine{% endblock %}
+
+{% block content %}
+
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="row summary-row">
+                <div class="col s1">
+                                <a href="{% url "machines:driver" %}" class=" btn-floating waves-effect waves-light orange left driver-edit"><i class="mdi-editor-mode-edit"></i></a>
+                </div>
+                <div class="col s4 summary">
+                    <strong>Provider</strong> {{ driver.driver_name }}
+                </div>
+                <div class="col s5 summary">
+                    {% if driver_instance %}
+                        <strong>Login Details</strong> <em>{{ driver_instance.name }}</em>
+                    {% endif %}
+
+
+                </div>
+
+                <div class="col s1 summary">
+                    <img src="{{ driver.logo }}" class="img img-responsive" style="height: 60px;"/>
+                </div>
+
+            </div>
+
+        {% crispy machine_form machine_form.helper %}
+
+
+
+
+        <div id="swarm_form" style="display: none;">
+            {% crispy swarm_form swarm_form.helper %}
+        </div>
+
+
+        {% crispy settings_form settings_form.helper %}
+
+        <div class="row">
+                <div class="col s12">
+                <button class="btn-large blue darken-2 right mtop30">Start</button>
+                    </div>
+            </div>
+    </form>
+
+{% endblock %}

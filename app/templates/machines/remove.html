@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}Confirm Remove{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+
+        <p>
+            Are you sure you want to remove this machine? Everything on this instance will be lost!
+        </p>
+
+        {{ form|crispy }}
+
+
+        <button class="btn-large red">Delete</button>
+    </form>
+{% endblock %}

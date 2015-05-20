@@ -1,0 +1,11 @@
+django
+django-crispy-forms
+#django-debug-toolbar
+#sqlparse
+
+#django-materialize-css
+-e git+https://github.com/jayfk/crispy-forms-materialize.git#egg=crispy-forms-materialize
+#django-materializecss-form
+jsonfield
+cherrypy
+unipath

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block js %}
+
+{% endblock %}
+
+{% block title %}Provider{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        {% for driver in drivers %}
+            <div class="col s12 m4 l4">
+                <div class="card">
+                    <div class="card-image">
+                        <a href="{% url "drivers:add" driver.identifier %}">
+                        <img src="{{ driver.logo }}">
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

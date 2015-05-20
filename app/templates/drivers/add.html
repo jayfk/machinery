@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Login Details{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $('select').material_select();
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row summary-row">
+
+        <div class="col s4 summary">
+            <strong>Provider</strong> {{ driver_name }}
+        </div>
+
+
+        <div class="col s5 summary">
+            <img src="{{ logo }}" class="img img-responsive" style="height: 60px;"/>
+        </div>
+
+
+    </div>
+
+    <form method="POST" enctype='multipart/form-data'>
+        <fieldset>
+            {% csrf_token %}
+            {{ form|crispy }}
+
+        </fieldset>
+        <div class="row">
+            <div class="col s12">
+                <button class="btn-large blue darken-2 right mtop30">Save</button>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+
+
+{% endblock %}

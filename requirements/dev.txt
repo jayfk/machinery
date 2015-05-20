@@ -1,0 +1,3 @@
+-r base.txt
+#until #1067 is resolved
+-e git+https://github.com/jayfk/pyinstaller.git#egg=pyinstaller
