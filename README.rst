@@ -1,21 +1,27 @@
+.. image:: https://www.getmachinery.io/static/img/logo.png
+
+
 ==========
 Quickstart
 ==========
-You can run machinery as a docker container or as an application. Visit `getmachinery.io <http://www.getmachinery.io/get/>`_ to get started.
+You can run machinery as a docker container or as a standalone desktop application. Visit `getmachinery.io <http://www.getmachinery.io/get/>`_ to get started.
 
 
 ===============
 About
 ===============
-machinery is written in python using the django framework. Communication with docker-machine is done through the command line interface.
+machinery is written in Python using the Django framework. Communication with docker-machine is done through the command line interface.
 
-The desktop application is realised with githubs electron which starts a CherryPy webserver serving the django application.
+The standalone desktop application consists of two elements:
+
+- A lightweight CherryPy webserver that runs the django applicaton
+- Githubs Electron starts the webserver on localhost and opens a Window that renders the HTML/JS.
 
 ===============
 Development
 ===============
 
-If you are familiar with python and django, you can jump right in by installing all dependencies with
+If you are familiar with Python and Django, you can jump right in by installing all dependencies with
 
 ``pip install -r requirements/base.txt``
 
