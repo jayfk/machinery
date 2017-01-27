@@ -1,6 +1,10 @@
 ==========
 Warning
 ==========
+
+.. image:: https://badges.greenkeeper.io/jayfk/machinery.svg
+   :alt: Greenkeeper badge
+   :target: https://greenkeeper.io/
 This project was a little experiment to port a django application to the desktop. It is no longer maintained.
 
 .. image:: https://www.getmachinery.io/static/img/logo.png
